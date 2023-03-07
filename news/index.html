@@ -165,6 +165,11 @@
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
 <h2 id="unreleased"><a href="https://github.com/lualdap/lualdap/compare/v1.3.0...HEAD">Unreleased</a></h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Fix segfault in <code>search()</code> with multiple attrs</li>
+<li>Improve example with <code>search()</code> in manual</li>
+</ul>
 <h2 id="130-2021-06-05"><a href="https://github.com/lualdap/lualdap/compare/v1.2.6...v1.3.0">1.3.0</a> - 2021-06-05</h2>
 <h3 id="added">Added</h3>
 <ul>
@@ -181,7 +186,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Lua 5.4 compatibility</li>
 <li>Updated documentation is available on <a href="https://lualdap.github.io/lualdap/">https://lualdap.github.io/lualdap/</a></li>
 </ul>
-<h3 id="fixed">Fixed</h3>
+<h3 id="fixed_1">Fixed</h3>
 <ul>
 <li>Fix case in Makefile when install directory does not exist</li>
 <li>WinLDAP variant</li>
@@ -222,7 +227,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Tests run against <a href="https://hub.docker.com/r/openshift/openldap-2441-centos7/">OpenShift's OpenLDAP 2.4.41</a> (<a href="https://github.com/openshift/openldap/">source</a>)</li>
 <li>Keep track of unit test coverage using <a href="http://codecov.io/">Codecov</a></li>
 </ul>
-<h3 id="fixed_1">Fixed</h3>
+<h3 id="fixed_2">Fixed</h3>
 <ul>
 <li>C89 compatibility</li>
 <li>Fix two credentials-related segfaults in <code>open_simple()</code></li>
