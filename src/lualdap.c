@@ -965,11 +965,13 @@ static int lualdap_initialize (lua_State *L) {
 ** Open a connection to a server.
 ** @param #1 String with hostname.
 ** @param #2 Boolean indicating if TLS must be used.
+** @param #3 Number for connection timeout (optional).
 ** @return #1 Userdata with connection structure.
 */
 static int lualdap_open (lua_State *L) {
 	ldap_pchar_t host = (ldap_pchar_t) luaL_checkstring (L, 1);
 	int use_tls = lua_toboolean (L, 2);
+	double timeout = lua_tonumber (L, 3);
 	conn_data *conn = (conn_data *)lua_newuserdata (L, sizeof(conn_data));
 #if defined(LDAP_API_FEATURE_X_OPENLDAP) && LDAP_API_FEATURE_X_OPENLDAP >= 20300
 	int err;
@@ -1000,6 +1002,21 @@ static int lualdap_open (lua_State *L) {
 	if (conn->ld == NULL)
 #endif
 		return faildirect(L,LUALDAP_PREFIX"Error connecting to server");
+/* LDAP_OPT_TIMEOUT and LDAP_OPT_NETWORK_TIMEOUT are not supported by WinLDAP.
+ * WinLDAP does have LDAP_OPT_SEND_TIMEOUT; it is yet to be determined whether
+ * that would work as a connection timeout */
+#if !defined(WIN32) && !defined(WINLDAP)
+	/* Set timeout (optionally) */
+	if (timeout > 0) {
+		struct timeval optTimeout;
+		optTimeout.tv_usec = ((long)(timeout * 1000000)) % 1000000;
+		optTimeout.tv_sec = timeout;
+		if (ldap_set_option (conn->ld, LDAP_OPT_TIMEOUT, &optTimeout) != LDAP_OPT_SUCCESS)
+			return faildirect(L, LUALDAP_PREFIX"Could not set timeout");
+		if (ldap_set_option (conn->ld, LDAP_OPT_NETWORK_TIMEOUT, &optTimeout) != LDAP_OPT_SUCCESS)
+			return faildirect(L, LUALDAP_PREFIX"Could not set network timeout");
+	}
+#endif
 	/* Set protocol version */
 	conn->version = LDAP_VERSION3;
 	if (ldap_set_option (conn->ld, LDAP_OPT_PROTOCOL_VERSION, &conn->version)
@@ -1020,6 +1037,7 @@ static int lualdap_open (lua_State *L) {
 ** @param #2 String with username.
 ** @param #3 String with password.
 ** @param #4 Boolean indicating if TLS must be used.
+** @param #5 Number for connection timeout (optional).
 ** @return #1 Userdata with connection structure.
 */
 static int lualdap_open_simple (lua_State *L) {
@@ -1027,12 +1045,14 @@ static int lualdap_open_simple (lua_State *L) {
 	ldap_pchar_t who = (ldap_pchar_t) luaL_optstring (L, 2, "");
 	const char *password = luaL_optstring (L, 3, "");
 	int use_tls = lua_toboolean (L, 4);
+	double timeout = lua_tonumber (L, 5);
 
 	/* Open */
 	lua_pushcfunction (L, lualdap_open);
 	lua_pushstring (L, host);
 	lua_pushboolean (L, use_tls);
-	lua_call (L, 2, 2);
+	lua_pushnumber (L, timeout);
+	lua_call (L, 3, 2);
 	if (lua_isnil (L, -2)) {
 		return 2; /* nil, msg */
 	} else {

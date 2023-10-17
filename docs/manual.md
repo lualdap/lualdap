@@ -54,7 +54,7 @@ in [Related documentation](manual.md#related-documentation) section.
 
 LuaLDAP provides a single way to connect to an LDAP server:
 
-### `lualdap.open_simple (hostname, who, password, usetls)`
+### `lualdap.open_simple (hostname, who, password, usetls, timeout)`
 
 Initializes a session with an LDAP server.
 
@@ -68,10 +68,14 @@ the third argument, `password`.
 The optional argument `usetls` is a Boolean flag indicating
 if Transport Layer Security (TLS) should be used.
 
+The optional argument `timeout` is the connection timeout in seconds.
+The precision is microseconds. It also sets a timeout for subsequent network
+operations. This argument has no effect on Microsoft Windows.
+
 Returns a connection object if the operation was successful.
 In case of error it returns `nil` followed by an error string.
 
-### `lualdap.open (hostname, usetls)`
+### `lualdap.open (hostname, usetls, timeout)`
 
 Open and initialize a connection to a LDAP server (without binding, see method `bind_simple`).
 
@@ -80,6 +84,10 @@ to try to connect to, and each host may optionally by of the form host:port.
 
 The optional argument `usetls` is a Boolean flag indicating
 if Transport Layer Security (TLS) should be used.
+
+The optional argument `timeout` is the connection timeout in seconds.
+The precision is microseconds. It also sets a timeout for subsequent network
+operations. This argument has no effect on Microsoft Windows.
 
 Returns a connection object if the operation was successful.
 In case of error it returns `nil` followed by an error string.

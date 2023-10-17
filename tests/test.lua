@@ -196,6 +196,13 @@ describe("creating a connection using a hostname", function()
 	end)
 end)
 
+describe("creating a connection with connection timeout", function()
+	local ld = CONN_OK (lualdap.open_simple (HOSTNAME, BIND_DN, PASSWORD, false, 60))
+	it("can close connection", function()
+		assert.is_same(1, ld:close())
+	end)
+end)
+
 describe("tests on an existing connection", function()
 	local LD, CLOSED_LD
 
