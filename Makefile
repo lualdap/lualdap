@@ -56,6 +56,9 @@ setup_slapd:
 check:
 	. tests/$(SLAPD)/test.env && LUA_CPATH="./src/?.so" busted tests/test.lua
 
+valgrind:
+	. tests/$(SLAPD)/test.env && LUA_CPATH="./src/?.so" valgrind --keep-debuginfo=yes --leak-check=full busted tests/test.lua
+
 coverage: $(REPORT_DIR)
 	. tests/$(SLAPD)/test.env && LUA_CPATH="./src/?.so" busted --coverage --output=junit -Xoutput $(REPORT_DIR)/report.xml tests/test.lua
 	luacov
