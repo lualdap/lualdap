@@ -60,14 +60,17 @@ LuaLDAP provides some ways to create a LDAP connection object:
 Initializes a session with an LDAP server.
 
 The argument `hostname` may contain a blank-separated list of hosts
-to try to connect to, and each host may optionally by of the form _host:port_.
+to try to connect to, each host having the form _schema://host:port_.
+If no schema is specified for all of the given hosts, `ldap://` is used
+as the default.
 
 The argument `who` should be the [distinguished name](manual.md#distinguished-names)
 of the entry that has the password to be checked against
 the third argument, `password`.
 
-The optional argument `usetls` is a boolean flag indicating
-if Transport Layer Security (TLS) should be used.
+The optional argument `usetls` is a boolean flag indicating if StartTLS should be
+used when connecting via `ldap://`. Omit this when using other schemas such as
+`ldaps://`.
 
 The optional argument `timeout` is the connection timeout in seconds.
 The precision is microseconds. It also sets a timeout for subsequent network
@@ -81,10 +84,13 @@ In case of error it returns `nil` followed by an error string.
 Open and initialize a connection to a LDAP server (without binding, see method `bind_simple`).
 
 The argument `hostname` may contain a blank-separated list of hosts
-to try to connect to, and each host may optionally by of the form _host:port_.
+to try to connect to, each host having the form _schema://host:port_.
+If no schema is specified for all of the given hosts, `ldap://` is used
+as the default.
 
-The optional argument `usetls` is a boolean flag indicating
-if Transport Layer Security (TLS) should be used.
+The optional argument `usetls` is a boolean flag indicating if StartTLS should be
+used when connecting via `ldap://`. Omit this when using other schemas such as
+`ldaps://`.
 
 The optional argument `timeout` is the connection timeout in seconds.
 The precision is microseconds. It also sets a timeout for subsequent network
@@ -160,7 +166,7 @@ Deletes an entry from the directory.
 Changes the values of attributes in the given entry.
 The tables of operations are [tables of attributes](manual.md#representing-attributes)
 with the value on index `1` indicating the operation to be performed.
-The valid operations are: 
+The valid operations are:
 
 - `+` to add the values to the attributes
 - `-` to delete the values of the attributes
@@ -227,7 +233,7 @@ as returned by the search request.
 
 # Example
 
-Here is a some sample code that demonstrate the basic use of the library (see also the 
+Here is a some sample code that demonstrate the basic use of the library (see also the
 [Teal type definition](https://github.com/teal-language/teal-types/blob/master/types/lualdap/lualdap.d.tl) of the library).
 
 ```lua
