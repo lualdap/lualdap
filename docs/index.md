@@ -35,4 +35,6 @@ or [Ubuntu](https://packages.ubuntu.com/jammy/lua-ldap).
 
 RPM packages are available on [Fedora](https://src.fedoraproject.org/rpms/lua-ldap).
 
+APK packages are available on [Alpine](https://pkgs.alpinelinux.org/packages?name=lua-ldap).
+
 More downstreams on [repology.org](https://repology.org/projects/?search=lualdap&maintainer=&category=&inrepo=&notinrepo=&repos=&families=&repos_newest=&families_newest=).
