@@ -31,7 +31,7 @@ luarocks install lualdap
 ```
 
 Debian packages are available on [Debian](https://packages.debian.org/sid/lua-ldap)
-or [Ubuntu](https://packages.ubuntu.com/jammy/lua-ldap).
+or [Ubuntu](https://packages.ubuntu.com/noble/lua-ldap).
 
 RPM packages are available on [Fedora](https://src.fedoraproject.org/rpms/lua-ldap).
 
