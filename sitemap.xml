@@ -2,27 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://lualdap.github.io/lualdap/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://lualdap.github.io/lualdap/contributors/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://lualdap.github.io/lualdap/license/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://lualdap.github.io/lualdap/manual/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2025-08-11</lastmod>
     </url>
     <url>
          <loc>https://lualdap.github.io/lualdap/news/</loc>
-         <lastmod>2023-11-04</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2025-08-11</lastmod>
     </url>
 </urlset>
