@@ -13,7 +13,7 @@ It enables a Lua program to:
 
 ## Status
 
-It's developed for Lua 5.1, 5.2, 5.3 & 5.4, and OpenLDAP 2.3 or newer.
+It's developed for Lua 5.1, 5.2, 5.3, 5.4 & 5.5, and OpenLDAP 2.3 or newer.
 
 ## Download
 
